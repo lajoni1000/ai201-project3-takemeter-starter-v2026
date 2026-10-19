@@ -111,9 +111,9 @@ I manually labeled the first 20 posts without AI assistance to practice applying
 
 | Label | Count | Share |
 |---|---|---|
-|implementation_guidance  | 82 | 41 |
-|risk_assessment  | 66 | 33 |
-| conceptual_explanation | 52 | 26 |
+|implementation_guidance  | 82 | 41% |
+|risk_assessment  | 66 | 33% |
+| conceptual_explanation | 52 | 26% |
 | **Total** | 200 | 100% |
 The dataset contains 200 unique posts, and no label represents more than 60% of the dataset.
 
@@ -145,11 +145,37 @@ This post could fit either conceptual_explanation or risk_assessment. The user a
 
 **Base model:**
 
-**Settings:** <!-- epochs, learning rate, batch size, seed -->
+I used `distilbert-base-uncased`, a pretrained language model that I fine-tuned to classify cybersecurity questions into my three categories.
+
+**Settings:**
+- Maximum sequence length: 128 tokens per post
+- Epochs: 3
+- Learning rate: 2e-5
+- Batch size: 16
+- Random seed: 42
+- Device: CPU
+- PyTorch version: 2.14.1+cpu
 
 **Anything I changed from the defaults, and why:**
 
-**Split sizes:** <!-- train / val / test, and per-label counts in the test
+I kept the default training settings provided in the CodePath notebook. I only replaced the example labels with my three cybersecurity categories: `conceptual_explanation`, `implementation_guidance`, and `risk_assessment`.
+
+I wanted to complete the first training run using the original settings before experimenting with any changes.
+
+**Split sizes:**
+
+The notebook automatically divided my 200 labeled posts into training, validation, and test sets using an approximately 70/15/15 split.
+
+| Label | Training | Validation | Test |
+|---|---:|---:|---:|
+| conceptual_explanation | 36 | 8 | 8 |
+| implementation_guidance | 57 | 13 | 12 |
+| risk_assessment | 46 | 10 | 10 |
+| **Total** | **139** | **31** | **30** |
+
+All three labels have at least eight examples in the test set, although the relatively small number of test examples may contribute to variation in the evaluation results.
+
+<!-- train / val / test, and per-label counts in the test
 split. If a label had fewer than about 8 in test, say so — it explains a lot
 of next unit's variance. -->
 
@@ -180,7 +206,7 @@ of next unit's variance. -->
 
 **Pre-labelling disclosure:**
 
-I manually labeled the first 20 posts without AI assistance. I then used ChatGPT to pre-label the remaining 180 posts. I read and reviewed all 200 posts, accepted the suggestions I agreed with, and corrected the others. The AI-assisted labeling process and human review are documented in the `note` column of `labels.csv`. I made the final labeling decisions myself.**Moment 1**
+I manually labeled the first 20 posts without AI assistance. I then used ChatGPT to pre-label the remaining 180 posts. I read and reviewed all 200 posts, accepted the suggestions I agreed with, and corrected the others. The AI-assisted labeling process and human review are documented in the `note` column of `labels.csv`. I made the final labeling decisions myself.
 
 
 
