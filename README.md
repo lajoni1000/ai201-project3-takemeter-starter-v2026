@@ -41,7 +41,7 @@
 
 <!-- Your community, and what your classifier sorts posts into. Three or four
      sentences. -->
-
+For this project, I selected Information Security Stack Exchange, a public community where people ask questions about cybersecurity. My goal is to build a classifier that identifies what type of help a person is looking for when asking a security-related question. Instead of classifying posts by cybersecurity topic, I decided to focus on the user's main need: understanding a concept, getting practical guidance, or evaluating a security risk. 
 
 
 ---
@@ -54,31 +54,39 @@
      The decision rule is worth a point on its own and it's the thing most
      people leave out. Every taxonomy has a hardest boundary. Name yours. -->
 
-### `label_one`
+### `conceptual_explanation`
 
-**Definition:**
+**Definition:** The user wants to understand a cybersecurity concept, technology, or principle.
 
-**Example 1:**
->
+**Example 1:** What key does an HTTPS server use to encrypt data sent to a client?
 
-**Example 2:**
->
+**Example 2:** Public vs private network vulnerability difference
 
-### `label_two`
+### `implementation_guidance`
 
-**Definition:**
+**Definition:** The user needs practical guidance to configure, implement, troubleshoot, or improve a security solution.
 
-**Example 1:**
->
+**Example 1:** Securing Mobile/Desktop App's Access to Database
 
-**Example 2:**
->
+**Example 2:** How to chain multiple VPNs?
+
+### `risk_assessment`
+
+**Definition:** The user wants to evaluate whether a situation, behavior, or technology presents a security risk.
+
+**Example 1:** Can open-source/weight LLMs like DeepSeek leak private code or data when run locally?
+
+**Example 2:** Can an attacker use HTTP header injection or response splitting to trigger XSS despite HTML escaping?
 
 ### The hardest boundary
 
-**Which two labels:**
+**Which two labels:** `conceptual_explanation` and `implementation_guidance`
 
 **The decision rule I used every time:**
+
+When a post asks for specific steps, configurations, or practical criteria to solve a cybersecurity problem, I classify it as `implementation_guidance`, even if the person also wants to understand the concept. If the main purpose is to understand how something works, without asking for a practical solution, I classify it as `conceptual_explanation`.
+
+
 <!-- e.g. "If the post names a specific checkable fact, it's `analysis`, even
      if the tone is heated." -->
 
