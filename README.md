@@ -100,44 +100,42 @@ When a post asks for specific steps, configurations, or practical criteria to so
      cases. -->
 
 **Where the posts came from:**
+I collected 200 public cybersecurity questions from Information Security Stack Exchange. I used a Python script to download the questions, including their titles and full bodies, and organized them into a CSV file.
+
 
 **How I labelled them:** <!-- Cold first? Pre-labelled with AI and corrected?
 Say so plainly — the disclosure is required, not penalised. -->
+I manually labeled the first 20 posts without AI assistance to practice applying my label definitions. For the remaining 180 posts, I used ChatGPT to suggest labels. I read and reviewed every post, accepted the suggestions I agreed with, and corrected the labels when I considered another category more appropriate. I also documented some of my decisions in the note column.
 
 **Counts per label:**
 
 | Label | Count | Share |
 |---|---|---|
-|  |  |  |
-|  |  |  |
-|  |  |  |
-| **Total** |  | 100% |
+|implementation_guidance  | 82 | 41 |
+|risk_assessment  | 66 | 33 |
+| conceptual_explanation | 52 | 26 |
+| **Total** | 200 | 100% |
+The dataset contains 200 unique posts, and no label represents more than 60% of the dataset.
+
 
 **Three hard cases**
 
 <!-- Any post that made you pause: what it was, which two labels it could have
      been, and what you chose. These are worth more than the easy 190. -->
 
-**1.**
-> *The post:*
->
-> *Could have been:*
->
-> *I chose, because:*
+**1.** Post #40 — iCloud E2EE encryption keys
 
-**2.**
-> *The post:*
->
-> *Could have been:*
->
-> *I chose, because:*
+This post could fit either risk_assessment or conceptual_explanation. AI initially suggested risk_assessment because the question raised concerns about possible exposure of encryption keys. However, I changed it to conceptual_explanation because the main question was about how the keys are generated and handled. I decided that understanding the technical process was the primary intent.
 
-**3.**
-> *The post:*
->
-> *Could have been:*
->
-> *I chose, because:*
+
+**2.** Post #48 — Access tokens and refresh tokens
+
+This post could fit either conceptual_explanation or implementation_guidance. The user wanted to understand why access tokens and refresh tokens are both needed, but was also implementing authentication for a web application. AI initially suggested conceptual_explanation, but I changed it to implementation_guidance because the main purpose was to decide how to implement authentication securely. I applied my decision rule that practical implementation needs take priority over conceptual explanations.
+
+
+**3.** Post #80 — Security risks of proprietary software
+
+This post could fit either conceptual_explanation or risk_assessment. The user asked whether running proprietary software, such as JetBrains IDEs, could expose encryption keys or other sensitive information on a laptop. AI initially suggested conceptual_explanation, but I changed it to risk_assessment because the user was mainly trying to understand the security risks of using this software in their specific situation, rather than just learning how the technology works.
 
 ---
 
@@ -170,17 +168,22 @@ of next unit's variance. -->
 
 **Moment 1**
 
-- *What I asked for:*
-- *What came back:*
-- *What I changed:*
+- **What I asked for:** I asked ChatGPT to help me create a Python script to collect public cybersecurity questions from Information Security Stack Exchange, including their titles and full question bodies.
+- **What came back:** ChatGPT provided Python code to download the questions and organize them into a CSV file.
+- **What I changed:** I tested the script, first collecting a smaller sample of questions, and then used it to collect 200 posts for my dataset.
 
 **Moment 2**
 
-- *What I asked for:*
-- *What came back:*
-- *What I changed:*
+- **What I asked for:** I asked ChatGPT to suggest labels for cybersecurity questions using my three label definitions and the decision rule I had established.
+- **What came back:** ChatGPT provided suggested labels for the posts, including some cases where the classification was ambiguous.
+- **What I changed:** I reviewed the full text of every post, corrected labels when I disagreed, and documented some of my decisions in the `note` column. For example, I changed post #40 from `risk_assessment` to `conceptual_explanation` because the main question was about understanding how E2EE keys work.
 
 **Pre-labelling disclosure:**
+
+I manually labeled the first 20 posts without AI assistance. I then used ChatGPT to pre-label the remaining 180 posts. I read and reviewed all 200 posts, accepted the suggestions I agreed with, and corrected the others. The AI-assisted labeling process and human review are documented in the `note` column of `labels.csv`. I made the final labeling decisions myself.**Moment 1**
+
+
+
 
 <!-- ═══════════════════════ UNIT 6 — THE TEST ═══════════════════════
 
