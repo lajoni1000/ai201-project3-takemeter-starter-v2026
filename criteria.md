@@ -51,62 +51,48 @@ whether you hit them:
 
 ---
 
-## 1.
+## 1. Overall Accuracy
+
+The model must achieve at least 80% overall accuracy on the held-out test set.
+
+**Why this target:** I see this classifier as a customer service center, where questions are directed to specialized teams depending on the user's needs. I chose 80% because I consider it a reasonable starting point for correctly routing most questions, while accepting that approximately 2 out of 10 may need human review or correction. A wrong classification could send a question to the wrong team.
 
 <!-- Your criterion. It must name a number. -->
 
+---
 
+## 2. Per-Label Performance
 
-**Why this target:**
+Each of the three labels must achieve an F1-score of at least 0.70 on the held-out test set.
 
+**Why this target:** I want to evaluate the model's performance for each label, not just its overall accuracy, because a good overall result could hide poor performance in one category. The F1-score combines precision and recall, helping me evaluate how well the model identifies each type of question. I chose 0.70 because I consider it a reasonable starting point for the first version of my classifier, while recognizing that there is still room for improvement.
 
 
 ---
 
-## 2.
+## 3. Risk Assessment Recall
 
-<!-- Your criterion. -->
+The `risk_assessment` label must achieve at least 80% recall on the held-out test set.
 
-
-
-**Why this target:**
-
+**Why this target:** I consider risk assessment questions more critical than the other types of questions, so I want to give them priority. Going back to my customer service center example, I want at least 4 out of 5 risk assessment questions to be directed to the appropriate team. I chose 80% because I do not want more than 20% of these questions to be incorrectly routed to another team, where users might receive a conceptual explanation instead of a security risk assessment.
 
 
 ---
 
-## 3.
+## 4. Maximum Label Share
 
-<!-- Your criterion. -->
+No single label should represent more than 60% of the 200-post dataset.
 
-
-
-**Why this target:**
-
+**Why this target:** During my initial review of posts from Information Security Stack Exchange, I noticed that many questions seemed to be asking for implementation guidance. My initial impression is that this category could represent more than 45% of the questions. I chose a maximum of 60% because I want to allow some differences between categories while preventing one label from dominating the dataset. This would leave at least 40% of the examples for the other two categories.
 
 
 ---
 
-## 4.
+## 5. Minimum Label Representation
 
-<!-- Your criterion. -->
+Each of the three labels must have at least 40 examples in the 200-post dataset.
 
-
-
-**Why this target:**
-
-
-
----
-
-## 5.
-
-<!-- Your criterion. -->
-
-
-
-**Why this target:**
-
+**Why this target:** Ideally, I would like each category to represent around 30% of the dataset. However, for this first version of TakeMeter, I feel comfortable starting with a minimum of 20% per category. This will ensure that the model has examples from all three categories to learn from, even if the dataset is not perfectly balanced.
 
 
 ---
