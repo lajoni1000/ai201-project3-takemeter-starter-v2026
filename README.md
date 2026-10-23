@@ -281,17 +281,18 @@ This experiment helped me understand that providing clear label definitions can 
 <!-- ⚠️ TYPED AS A MARKDOWN TABLE. The notebook prints one ready to paste.
      An image of a matrix earns nothing. -->
 
-| true \ predicted |  |  |  |
+| true \ predicted | conceptual_explanation | implementation_guidance | risk_assessment |
 |---|---|---|---|
-| **** |  |  |  |
-| **** |  |  |  |
-| **** |  |  |  |
+| **conceptual_explanation** | 0 | 8 | 0 |
+| **implementation_guidance** | 0 | 12 | 0 |
+| **risk_assessment** | 0 | 10 | 0 |
 
 **My biggest off-diagonal number, and what it means:**
 <!-- Not "the model made mistakes" — WHICH boundary it didn't learn, and which
      direction. "7 real analysis posts were called hot_take and only 3 went the
      other way" is a direction, not just an error rate. -->
-
+The biggest confusion was between risk_assessment and implementation_guidance. The model classified 10 risk assessment posts as implementation guidance, but none in the opposite direction.
+I also noticed that the model predicted implementation_guidance for all 30 test posts. This tells me that the model is not distinguishing the three categories correctly. I still need to investigate whether the problem comes from my labels, the dataset, or the training process.
 
 
 ---
