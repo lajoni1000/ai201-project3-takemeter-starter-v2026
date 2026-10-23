@@ -225,24 +225,45 @@ I manually labeled the first 20 posts without AI assistance. I then used ChatGPT
 
 | Measure | Baseline | Trained | Difference |
 |---|---|---|---|
-| Overall accuracy |  |  |  |
-| Macro F1 |  |  |  |
-| F1 — `label_one` |  |  |  |
-| F1 — `label_two` |  |  |  |
+| Overall accuracy | 0.500 | 0.400 | -0.100 |
+| Macro F1 | 0.422 | 0.190 | -0.232  |
+| F1 — conceptual_explanation | 0.667 | 0.000  | -0.667  |
+| F1 — implementation_guidance | 0.000 | 0.571 | +0.571  |	
+| F1 — risk_assessment | 0.600 | 0.000 | -0.600 |	
 
 **What I predicted before I looked:**
 <!-- Milestone 1 asks you to write this BEFORE seeing the trained numbers. A
      prediction made afterwards isn't one. -->
+Before running the comparison, I expected my fine-tuned model to perform better than the baseline in overall accuracy and in the conceptual_explanation category.
+
 
 **What the gap actually means:**
 <!-- If the baseline matched your trained model, your fine-tuning added
      nothing — and that is a real finding, not a failure. Say it plainly. -->
 
-
+The results did not support my expectations. Overall accuracy decreased from 0.500 to 0.400, and the F1 score for conceptual_explanation dropped from 0.667 to 0.000.
+Interestingly, the fine-tuned model performed better on implementation_guidance, improving its F1 score from 0.000 to 0.571.
+These results suggest that fine-tuning helped the model with one category but did not improve its overall performance. I need to investigate why the model struggled with the other two categories.
 
 ---
+### Impact of Label Definitions
+
+I also ran the baseline without label_definitions.txt to see whether providing definitions would make a difference.
+
+Measure | Without Definitions | With Definitions |
+Overall accuracy | 0.433 | 0.500 |
+Macro F1 | 0.352 | 0.422 |
+F1 — conceptual_explanation | 0.500 | 0.667 |
+F1 — implementation_guidance | 0.000 |0.000
+F1 — risk_assessment | 0.556 | 0.600
+
+Without definitions, the baseline correctly classified 13 out of 30 posts. With definitions, it correctly classified 15.
+The definitions improved accuracy by 6.7 percentage points. The largest improvement was in conceptual_explanation, while implementation_guidance remained at an F1 score of 0.000.
+This experiment helped me understand that providing clear label definitions can improve classification performance even without fine-tuning the model.
+
 
 ## Run Log — Before
+
 
 <!-- Five criteria across three seeds. The notebook's section 6 prints the
      spread table; the Target and Verdict columns are yours. -->

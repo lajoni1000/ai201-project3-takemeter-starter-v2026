@@ -5,6 +5,20 @@
 #
 # Delete the examples below and put yours in.
 
-analysis: makes an argument backed by a specific, checkable fact
-hot_take: a confident claim with no support offered
-reaction: an immediate response to something that just happened
+#analysis: makes an argument backed by a specific, checkable fact
+#hot_take: a confident claim with no support offered
+#reaction: an immediate response to something that just happened
+
+
+## Label Taxonomy
+
+<!-- Each label: a one-sentence definition and two real examples from your
+     reading. Then your decision rule for the hardest boundary.
+
+     The decision rule is worth a point on its own and it's the thing most
+     people leave out. Every taxonomy has a hardest boundary. Name yours. -->
+
+conceptual_explanation: the user wants to understand a cybersecurity concept, technology, or principle.
+implementation_guidance: the user needs practical guidance to configure, implement, troubleshoot, or improve a security solution.
+risk_assessment: the user wants to evaluate whether a situation, behavior, or technology presents a security risk.
+
