@@ -333,7 +333,7 @@ I also noticed that the model predicted implementation_guidance for all 30 test 
      data/staff_taxonomy.md, not your own — so every argument below is made
      from those definitions and those decision rules. -->
 
-**Agreement rate:** ___ / 30 = ___%
+**Agreement rate:** 30 / 30 = 100%
 
 <!-- Nobody grades this number. A 60% who argues every disagreement from the
      stated rules beats a 95% who wrote "staff was right" nine times. Several
@@ -355,28 +355,12 @@ I also noticed that the model predicted implementation_guidance for all 30 test 
      written rule two different ways on 30 posts, that is direct evidence about
      what you did across your own 200. -->
 
-**1.**
-> *The post:*
->
-> *Staff said / I said:*
->
-> *My call, and why:*
->
-> *Which pile:*
-
-**2.**
-> *The post:*
->
-> *Staff said / I said:*
->
-> *My call, and why:*
->
-> *Which pile:*
+There were no disagreements between my final labels and the staff labels. All 30 posts matched, so there were no cases to adjudicate or assign to piles (a), (b), or (c).
 
 **What the pattern in my disagreements tells me:**
-
-
-
+Although I had no disagreements in the final comparison, I initially had some difficulty applying the taxonomy rules.
+For example, I initially classified sp_005 and sp_007 as reaction because they described personal running experiences. After reviewing the rules, I understood that these posts were better classified as analysis because the authors used measurable information, such as running times, mileage, and temperature, to support their conclusions.
+Another interesting example was sp_014, which I classified as hot_take. Although the author mentioned a 3% change in running times, that number alone did not establish that shoes were the only cause. 
 ---
 
 ## The Improvement
