@@ -270,11 +270,11 @@ This experiment helped me understand that providing clear label definitions can 
 
 | Criterion | Target | Seed 42 | Seed 7 | Seed 2024 | Verdict |
 |---|---|---|---|---|---|
-| 1.  |  |  |  |  |  |
-| 2.  |  |  |  |  |  |
-| 3.  |  |  |  |  |  |
-| 4.  |  |  |  |  |  |
-| 5.  |  |  |  |  |  |
+| 1. Overall Accuracy | >= 0.80 | 0.40 | 0.40 | 0.40 | MISSED |
+| 2. Per-Label F1 | Each label >= 0.70 | 0.00 | 0.00 | 0.00 | MISSED |
+| 3. Risk Assessment Recall | >= 0.80 | 0.00 | 0.00 | 0.00 | MISSED |
+| 4. Maximum Label Share | <= 60% | 41% | 41% | 41% | MET |
+| 5. Minimum Label Representation | >= 40 examples | 52 | 52 | 52 | MET |
 
 ### Confusion matrix
 
@@ -302,13 +302,15 @@ I also noticed that the model predicted implementation_guidance for all 30 test 
 <!-- MET or MISSED against LAST UNIT's target. The target has to hold across
      all three seeds, not turn up sometimes. -->
 
+
 | # | Criterion | Target | Verdict | How I decided |
 |---|---|---|---|---|
-| 1 |  |  |  |  |
-| 2 |  |  |  |  |
-| 3 |  |  |  |  |
-| 4 |  |  |  |  |
-| 5 |  |  |  |  |
+| 1 | Overall Accuracy | >= 0.80 | MISSED | Accuracy was 0.40 across all three seeds, below my 0.80 target. |
+| 2 | Per-Label F1 | Each label >= 0.70 | MISSED | None of the three labels reached 0.70. Two labels had an F1 of 0.00. |
+| 3 | Risk Assessment Recall | >= 0.80 | MISSED | Recall was 0.00 in all three seeds. None of the 10 risk assessment test posts were correctly identified. |
+| 4 | Maximum Label Share | <= 60% | MET | The largest category was implementation_guidance, with 82 of 200 posts (41%). |
+| 5 | Minimum Label Representation | >= 40 examples | MET | The smallest category was conceptual_explanation, with 52 examples. |
+
 
 **Diagnoses**
 
@@ -321,6 +323,33 @@ I also noticed that the model predicted implementation_guidance for all 30 test 
      have that can tell a LABELLING problem from a MODEL problem, and this
      section is graded on whether you used it that way. -->
 
+Criterion 1 — Overall Accuracy: MISSED
+
+My target was 80% accuracy, but the model achieved only 40% across all three seeds.
+
+The confusion matrix shows that the model classified all 30 test questions as implementation_guidance, including questions labeled conceptual_explanation and risk_assessment.
+
+I think the model did not learn to distinguish the three categories well enough from the available training data. One possible reason is that cybersecurity questions often use similar technical language, even when the user's main intention is different. However, I cannot confirm that this was the main cause without further testing.
+
+Criterion 2 — Per-Label F1: MISSED
+
+My target was an F1-score of at least 0.70 for each label, but none of the three categories reached this target.
+
+What surprised me was that the model predicted only implementation_guidance, even though my dataset included 82 implementation, 66 risk assessment, and 52 conceptual explanation examples.
+
+This suggests that having examples from all three categories was not enough for the model to learn how to distinguish them. The limited training data may have contributed to this problem, but I would need further testing to confirm it.
+
+Criterion 3 — Risk Assessment Recall: MISSED
+
+My target was at least 80% recall for risk_assessment, but the model achieved 0% across all three seeds. All 10 risk assessment questions in the test set were classified as implementation_guidance.
+
+During labeling, I noticed that some questions could appear to request implementation guidance when the main purpose was actually to evaluate a security risk. For example, Post #197 discusses changing a Microsoft Defender Safe Links configuration, but the user's concern is whether this change introduces a security risk.
+
+This is a possible explanation for why the model struggled with risk_assessment, although I cannot confirm that this specific post was misclassified.
+
+What the agreement report tells me
+My agreement exercise resulted in 30 out of 30 matches with the staff labels. However, I reviewed some initial labeling decisions before the final comparison, and the exercise used a different taxonomy.
+Therefore, the agreement result does not prove that my cybersecurity labels were consistent. It also does not provide direct evidence that inconsistent labeling caused the model's errors. I would need a separate agreement check using my TakeMeter taxonomy to investigate that possibility.
 
 
 ---
