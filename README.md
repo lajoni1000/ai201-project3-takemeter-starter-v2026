@@ -395,24 +395,33 @@ Another interesting example was sp_014, which I classified as hot_take. Although
 ## The Improvement
 
 **What I changed:**
+I added 30 new `risk_assessment` examples to my dataset, increasing the total from 200 to 230 questions. The number of risk assessment examples increased from 66 to 96. I reviewed the new questions to make sure they matched my label definition.
+I kept the same base model, training settings, and three random seeds because I wanted to test the impact of adding more examples without changing other training parameters.
 
 **Which diagnosis pointed at it:**
+In my first experiment, the model failed to identify any `risk_assessment` questions. The recall was 0% across all three seeds, and the model classified every test question as `implementation_guidance`.
+I thought that adding more examples of risk assessment questions could help the model recognize this category better and improve its recall. I chose this change because risk recall was one of my original acceptance criteria, with a target of at least 80%.
+
+
 
 ### Run Log — After
 
 | Criterion | Target | Seed 42 | Seed 7 | Seed 2024 | Verdict |
 |---|---|---|---|---|---|
-| 1.  |  |  |  |  |  |
-| 2.  |  |  |  |  |  |
-| 3.  |  |  |  |  |  |
-| 4.  |  |  |  |  |  |
-| 5.  |  |  |  |  |  |
+| 1. Overall Accuracy | >= 0.80 | 0.514 | 0.429 | 0.429 | MISSED |
+| 2. Per-Label F1 (lowest) | Each label >= 0.70 | 0.000 | 0.000 | 0.000 | MISSED |
+| 3. Risk Assessment Recall | >= 0.80 | 1.000 | 1.000 | 1.000 | MET |
+| 4. Maximum Label Share | <= 60% | 41.7% | 41.7% | 41.7% | MET |
+| 5. Minimum Label Representation | >= 40 examples | 52 | 52 | 52 | MET |
+
 
 **Did it help, and how do I know:**
+However, I noticed an interesting pattern. In the first experiment, implementation_guidance had the most examples, and the model predicted that label for every test question. After adding more risk assessment examples, risk_assessment became the largest category, and the model started favoring that label instead. In two of the three runs, it classified every test question as risk_assessment.
+This makes me think the model may be relying too much on the most frequent label instead of learning to distinguish the three categories. Although risk recall improved, the model still has difficulty classifying questions correctly.
+One limitation is that the test sets changed when I added the new examples, so I cannot attribute the entire improvement to the additional training data. For a future experiment, I would keep the original test sets fixed to make the comparison more reliable. and earns full credit. -->
 
 <!-- If it didn't, say so. Relabelling that didn't help is a genuinely
-     interesting result and earns full credit. -->
-
+     interesting resultThe improvement helped with my main goal of increasing recall for risk_assessment. Before adding the 30 examples, risk recall was 0% across all three seeds. After retraining, it increased to 100% in all three runs.
 
 
 ---
