@@ -204,6 +204,11 @@ of next unit's variance. -->
 - **What came back:** ChatGPT provided suggested labels for the posts, including some cases where the classification was ambiguous.
 - **What I changed:** I reviewed the full text of every post, corrected labels when I disagreed, and documented some of my decisions in the `note` column. For example, I changed post #40 from `risk_assessment` to `conceptual_explanation` because the main question was about understanding how E2EE keys work.
 
+**Moment 3 — Collecting Additional Examples for Milestone 5**
+- **What I asked for:** I asked ChatGPT to help me modify my Python script to download more questions from Information Security Stack Exchange and select 30 that could belong to the `risk_assessment` category.
+- **What came back:** ChatGPT helped me with the script and suggested 30 questions that it considered possible `risk_assessment` examples.
+- **What I changed:** I reviewed all 30 questions one by one to check whether they matched my label definition. I disagreed with some of ChatGPT's suggestions and changed several of them because I thought they belonged to a different category. I made the final selection and added the 30 validated examples to my dataset.
+
 **Pre-labelling disclosure:**
 
 I manually labeled the first 20 posts without AI assistance. I then used ChatGPT to pre-label the remaining 180 posts. I read and reviewed all 200 posts, accepted the suggestions I agreed with, and corrected the others. The AI-assisted labeling process and human review are documented in the `note` column of `labels.csv`. I made the final labeling decisions myself.
@@ -429,12 +434,24 @@ One limitation is that the test sets changed when I added the new examples, so I
 ## What's Still Broken
 
 <!-- For each criterion still missed: what you'd do, and why you stopped. -->
+**Criterion 1 — Overall Accuracy: MISSED**
+My target was 80% accuracy, but after adding 30 risk assessment examples, the model achieved 51.4% accuracy with seed 42 and 42.9% with seeds 7 and 2024.
+Although the accuracy improved compared to the first experiment, the model still struggles to distinguish the three categories. I noticed that in both experiments, the model favored the label with the most examples. This makes me think that the model may be relying too much on the most frequent category instead of learning the differences between the types of questions.
+In a future experiment, I would investigate this pattern by testing a more balanced dataset and keeping the same test questions across runs. I stopped after this improvement because Milestone 5 required one change, and I wanted to evaluate its results before making additional changes.
 
+**Criterion 2 — Per-Label F1: MISSED**
+My target was an F1 score of at least 0.70 for each label, but the model did not meet this criterion in any of the three seeds.
+Although the F1 score for `risk_assessment` improved, the model still struggled with the other two categories. In seeds 7 and 2024, it classified every test question as `risk_assessment`, including questions that belonged to `implementation_guidance` and `conceptual_explanation`.
+This showed me that improving recall for one category does not necessarily mean the model is learning to classify all three categories correctly.
+In a future experiment, I would investigate whether balancing the number of examples across categories and reviewing the boundaries between labels could improve the results. I stopped after one improvement so I could evaluate its impact before making additional changes.
 
 
 **The gap between what I meant my labels to capture and what the model
 learned:**
 <!-- Two sentences. Your confusion matrix is the evidence. -->
+**The gap between what I meant my labels to capture and what the model learned:**
+
+I designed my labels to identify whether a cybersecurity question was asking for an explanation, practical guidance, or a risk assessment, based on the user's main intention. However, the confusion matrices showed that the model often favored the category with the most examples instead of distinguishing those intentions, predicting `implementation_guidance` for every question in the first experiment and `risk_assessment` for every question in two of the three runs after retraining.
 
 
 
